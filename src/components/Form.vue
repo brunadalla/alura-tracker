@@ -17,15 +17,15 @@
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
           <section>
-            <strong> 00:00:00 </strong>
+            <strong> {{ timeFormated }} </strong>
           </section>
-          <button class="button">
+          <button class="button" @click="start">
             <span class="icon">
               <i class="fas fa-play"></i>
             </span>
             <span>play</span>
           </button>
-          <button class="button">
+          <button class="button" @click="end">
             <span class="icon">
               <i class="fas fa-stop"></i>
             </span>
@@ -42,6 +42,27 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
   name: "FormTask",
+  data() {
+    return {
+      timeInSeconds: 0,
+      timer: 0
+    }
+  },
+  computed: {
+    timeFormated (): string {
+      return new Date(this.timeInSeconds * 1000).toISOString().substring(11, 19)
+    }
+  },
+  methods: {
+    start() {
+      this.timer = setInterval(() => {
+        this.timeInSeconds += 1
+      }, 1000)
+    },
+    end() {
+      clearInterval(this.timer)
+    },
+  },
 })
 </script>
 
