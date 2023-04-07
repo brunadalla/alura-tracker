@@ -16,9 +16,7 @@
         <div
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
-          <section>
-            <strong> {{ timeFormated }} </strong>
-          </section>
+          <CTimer :timeInSeconds="timeInSeconds" />
           <button class="button" @click="start">
             <span class="icon">
               <i class="fas fa-play"></i>
@@ -39,18 +37,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
+import CTimer from "./Timer.vue"
 
 export default defineComponent({
   name: "FormTask",
+  components: {
+    CTimer,
+  },
   data() {
     return {
       timeInSeconds: 0,
-      timer: 0
-    }
-  },
-  computed: {
-    timeFormated (): string {
-      return new Date(this.timeInSeconds * 1000).toISOString().substring(11, 19)
+      timer: 0,
     }
   },
   methods: {
@@ -67,3 +64,4 @@ export default defineComponent({
 </script>
 
 <style scoped></style>
+
