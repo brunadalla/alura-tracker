@@ -11,6 +11,7 @@
           :key="index"
           :task="task"
         />
+        <BoxComponent v-if="isEmpty"> Start your first task! </BoxComponent>
       </div>
     </div>
   </main>
@@ -22,6 +23,7 @@ import SideSection from "./components/SideSection.vue"
 import FormTask from "./components/Form.vue"
 import TaskComponent from "./components/Task.vue"
 import ITask from "./interfaces/ITask"
+import BoxComponent from "./components/Box.vue"
 
 export default defineComponent({
   name: "App",
@@ -29,11 +31,17 @@ export default defineComponent({
     SideSection,
     FormTask,
     TaskComponent,
+    BoxComponent,
   },
   data() {
     return {
       tasks: [] as ITask[],
     }
+  },
+  computed: {
+    isEmpty(): boolean {
+      return this.tasks.length === 0
+    },
   },
   methods: {
     saveTask(task: ITask) {
