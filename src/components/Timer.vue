@@ -22,6 +22,7 @@ import TimeFormatted from "./TimeFormatted.vue"
 
 export default defineComponent({
   name: "TimerComponent",
+  emits: ['toFinishedTimer'],
   components: {
     TimeFormatted,
   },
@@ -42,7 +43,11 @@ export default defineComponent({
     end() {
       this.isInitialized = false
       clearInterval(this.timer)
+      this.$emit('toFinishedTimer', this.timeInSeconds)
+      this.timeInSeconds = 0
     },
   },
 })
 </script>
+
+. 

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <strong> {{ timeFormated }} </strong>
+    <strong> {{ timeFormatted }} </strong>
   </section>
 </template>
 
@@ -16,7 +16,7 @@ export default defineComponent({
     },
   },
   computed: {
-    timeFormated(): string {
+    timeFormatted(): string {
       return new Date(this.timeInSeconds * 1000).toISOString().substring(11, 19)
     },
   },

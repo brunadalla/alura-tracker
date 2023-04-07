@@ -10,10 +10,11 @@
           type="text"
           class="input"
           placeholder="Which task do you like to start?"
+          v-model="description"
         />
       </div>
       <div class="column">
-        <TimerComponent />
+        <TimerComponent @toFinishedTimer="endTask" />
       </div>
     </div>
   </div>
@@ -27,6 +28,18 @@ export default defineComponent({
   name: "FormTask",
   components: {
     TimerComponent,
+  },
+  data() {
+    return {
+      description: "",
+    }
+  },
+  methods: {
+    endTask(timeFormatted: number): void {
+      console.log(timeFormatted)
+      console.log(this.description)
+      this.description = ""
+    },
   },
 })
 </script>
