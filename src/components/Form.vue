@@ -26,6 +26,7 @@ import TimerComponent from "./Timer.vue"
 
 export default defineComponent({
   name: "FormTask",
+  emits: ["toSaveTask"],
   components: {
     TimerComponent,
   },
@@ -36,8 +37,10 @@ export default defineComponent({
   },
   methods: {
     endTask(timeFormatted: number): void {
-      console.log(timeFormatted)
-      console.log(this.description)
+      this.$emit("toSaveTask", {
+        durationInSeconds: timeFormatted,
+        description: this.description,
+      })
       this.description = ""
     },
   },
@@ -45,5 +48,3 @@ export default defineComponent({
 </script>
 
 <style scoped></style>
-
-

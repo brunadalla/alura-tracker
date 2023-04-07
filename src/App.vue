@@ -4,9 +4,14 @@
       <SideSection />
     </div>
     <div class="column is-three-quarter">
-      <FormTask />
-      <div class="lista"></div>
-      <Task/>
+      <FormTask @toSaveTask="saveTask" />
+      <div class="list">
+        <TaskComponent
+          v-for="(task, index) in tasks"
+          :key="index"
+          :task="task"
+        />
+      </div>
     </div>
   </main>
 </template>
@@ -15,20 +20,31 @@
 import { defineComponent } from "vue"
 import SideSection from "./components/SideSection.vue"
 import FormTask from "./components/Form.vue"
-import Task from "./components/Task.vue"
+import TaskComponent from "./components/Task.vue"
+import ITask from "./interfaces/ITask"
 
 export default defineComponent({
   name: "App",
   components: {
     SideSection,
     FormTask,
-    Task,
+    TaskComponent,
+  },
+  data() {
+    return {
+      tasks: [] as ITask[],
+    }
+  },
+  methods: {
+    saveTask(task: ITask) {
+      this.tasks.push(task)
+    },
   },
 })
 </script>
 
 <style>
-.lista {
+.list {
   padding: 1.25rem;
 }
 </style>
