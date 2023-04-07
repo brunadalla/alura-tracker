@@ -1,30 +1,32 @@
 <template>
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <TimeFormatted :timeInSeconds="timeInSeconds" />
-    <button class="button" @click="start" :disabled="isInitialized">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button>
-    <button class="button" @click="end" :disabled="!isInitialized">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button>
+    <ButtonComponent
+      @clicked="start"
+      icon="fas fa-play"
+      content="play"
+      :isDisabled="isInitialized"
+    />
+    <ButtonComponent
+      @clicked="end"
+      icon="fas fa-stop"
+      content="stop"
+      :isDisabled="!isInitialized"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
 import TimeFormatted from "./TimeFormatted.vue"
+import ButtonComponent from "./Button.vue"
 
 export default defineComponent({
   name: "TimerComponent",
-  emits: ['toFinishedTimer'],
+  emits: ["toFinishedTimer"],
   components: {
     TimeFormatted,
+    ButtonComponent,
   },
   data() {
     return {
@@ -43,11 +45,9 @@ export default defineComponent({
     end() {
       this.isInitialized = false
       clearInterval(this.timer)
-      this.$emit('toFinishedTimer', this.timeInSeconds)
+      this.$emit("toFinishedTimer", this.timeInSeconds)
       this.timeInSeconds = 0
     },
   },
 })
 </script>
-
-. 
