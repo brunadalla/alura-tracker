@@ -13,23 +13,7 @@
         />
       </div>
       <div class="column">
-        <div
-          class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-          <CTimer :timeInSeconds="timeInSeconds" />
-          <button class="button" @click="start">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="end">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <TimerComponent />
       </div>
     </div>
   </div>
@@ -37,31 +21,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import CTimer from "./Timer.vue"
+import TimerComponent from "./Timer.vue"
 
 export default defineComponent({
   name: "FormTask",
   components: {
-    CTimer,
-  },
-  data() {
-    return {
-      timeInSeconds: 0,
-      timer: 0,
-    }
-  },
-  methods: {
-    start() {
-      this.timer = setInterval(() => {
-        this.timeInSeconds += 1
-      }, 1000)
-    },
-    end() {
-      clearInterval(this.timer)
-    },
+    TimerComponent,
   },
 })
 </script>
 
 <style scoped></style>
-

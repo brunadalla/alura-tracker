@@ -1,23 +1,47 @@
 <template>
-  <section>
-    <strong> {{ timeFormated }} </strong>
-  </section>
+  <div class="is-flex is-align-items-center is-justify-content-space-between">
+    <TimeFormatted :timeInSeconds="timeInSeconds" />
+    <button class="button" @click="start" :disabled="isInitialized">
+      <span class="icon">
+        <i class="fas fa-play"></i>
+      </span>
+      <span>play</span>
+    </button>
+    <button class="button" @click="end" :disabled="!isInitialized">
+      <span class="icon">
+        <i class="fas fa-stop"></i>
+      </span>
+      <span>stop</span>
+    </button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
+import TimeFormatted from "./TimeFormatted.vue"
 
 export default defineComponent({
-  name: "CTimer",
-  props: {
-    timeInSeconds: {
-      type: Number,
-      default: 0,
-    },
+  name: "TimerComponent",
+  components: {
+    TimeFormatted,
   },
-  computed: {
-    timeFormated(): string {
-      return new Date(this.timeInSeconds * 1000).toISOString().substring(11, 19)
+  data() {
+    return {
+      timeInSeconds: 0,
+      timer: 0,
+      isInitialized: false,
+    }
+  },
+  methods: {
+    start() {
+      this.isInitialized = true
+      this.timer = setInterval(() => {
+        this.timeInSeconds += 1
+      }, 1000)
+    },
+    end() {
+      this.isInitialized = false
+      clearInterval(this.timer)
     },
   },
 })
