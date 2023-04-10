@@ -1,6 +1,6 @@
 <template>
   <section>
-    <strong> {{ timeFormatted }} </strong>
+    <strong class="display"> {{ timeFormatted }} </strong>
   </section>
 </template>
 
@@ -22,3 +22,10 @@ export default defineComponent({
   },
 })
 </script>
+
+<style>
+.display {
+  color: var(--text-primary);
+}
+</style>
+

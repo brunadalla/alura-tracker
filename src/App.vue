@@ -1,9 +1,9 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline dark-mode">
     <div class="column is-one-quarter">
       <SideSection />
     </div>
-    <div class="column is-three-quarter">
+    <div class="column is-three-quarter content">
       <FormTask @toSaveTask="saveTask" />
       <div class="list">
         <TaskComponent
@@ -54,5 +54,16 @@ export default defineComponent({
 <style>
 .list {
   padding: 1.25rem;
+}
+main {
+  --bg-primary: #fff;
+  --text-primary: #000;
+}
+main.dark-mode {
+  --bg-primary: #2b2d42;
+  --text-primary: #ddd;
+}
+.content {
+  background-color: var(--bg-primary);
 }
 </style>
