@@ -6,7 +6,7 @@
     <div class="has-text-centered">
       <button class="button" @click="changeTheme">{{ buttonText }}</button>
     </div>
-    <nav class="panel mt-5">
+    <nav class="panel mt-5 p-2">
       <ul>
         <li>
           <router-link to="/" class="link">
@@ -63,6 +63,8 @@ header {
 }
 .panel li {
   margin: 8px 0;
+  padding: 0 10px;
+  text-align: left;
 }
 .link {
   color: #fff;
