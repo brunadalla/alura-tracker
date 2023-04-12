@@ -1,4 +1,7 @@
 # alura-tracker
+Aplicação desenvolvida no curso de Vue da Alura.
+
+O objetivo desse projeto era desenvolver um site, onde seja possivel cronometrar e salvar atividades.
 
 ## Project setup
 ```
