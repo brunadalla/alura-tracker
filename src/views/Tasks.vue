@@ -7,11 +7,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import FormTask from "../components/Form.vue"
-import TaskComponent from "../components/Task.vue"
+import { defineComponent, computed } from "vue"
+
+import { useStore } from "@/store"
 import ITask from "../interfaces/ITask"
+import FormTask from "../components/Form.vue"
 import BoxComponent from "../components/Box.vue"
+import TaskComponent from "../components/Task.vue"
+import { SAVE_TASK } from "@/store/mutations-type"
 
 export default defineComponent({
   name: "TasksComponent",
@@ -20,11 +23,6 @@ export default defineComponent({
     TaskComponent,
     BoxComponent,
   },
-  data() {
-    return {
-      tasks: [] as ITask[],
-    }
-  },
   computed: {
     isEmpty(): boolean {
       return this.tasks.length === 0
@@ -32,8 +30,15 @@ export default defineComponent({
   },
   methods: {
     saveTask(task: ITask) {
-      this.tasks.push(task)
+      this.store.commit(SAVE_TASK, task)
     },
+  },
+  setup() {
+    const store = useStore()
+    return {
+      tasks: computed(() => store.state.tasks),
+      store,
+    }
   },
 })
 </script>
