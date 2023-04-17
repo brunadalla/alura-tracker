@@ -3,6 +3,7 @@ import { createStore, Store, useStore as useStoreVuex } from "vuex"
 
 import IProject from "@/interfaces/IProject"
 import ITask from "@/interfaces/ITask"
+import { INotification, NotificationType } from "@/interfaces/INotification"
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -15,6 +16,7 @@ import {
 interface State {
   projects: IProject[]
   tasks: ITask[]
+  notifications: INotification[]
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -23,6 +25,26 @@ export const store = createStore<State>({
   state: {
     projects: [],
     tasks: [],
+    notifications: [
+      {
+        id: 1,
+        text: "Texto",
+        title: "Success",
+        type: NotificationType.SUCCESS,
+      },
+      {
+        id: 2,
+        text: "Texto",
+        title: "Error",
+        type: NotificationType.ERROR,
+      },
+      {
+        id: 3,
+        text: "Texto",
+        title: "Warning",
+        type: NotificationType.WARNING,
+      },
+    ],
   },
   mutations: {
     [ADD_PROJECT](state, projectName: string) {
