@@ -40,8 +40,6 @@ import { useStore } from "vuex"
 
 import { key } from "@/store"
 import TimerComponent from "./Timer.vue"
-import { NOTIFY } from "@/store/mutations-type"
-import { NotificationType } from "@/interfaces/INotification"
 
 export default defineComponent({
   name: "FormTask",
@@ -57,15 +55,6 @@ export default defineComponent({
   },
   methods: {
     saveTask(timeFormatted: number): void {
-      const project = this.projects.find((p) => p.id == this.idProject)
-      if (!project) {
-        this.store.commit(NOTIFY, {
-          title: "Ops!",
-          text: "Select a project before finalizing the task!",
-          type: NotificationType.ERROR,
-        })
-        return
-      }
       this.$emit("toSaveTask", {
         durationInSeconds: timeFormatted,
         description: this.description,
