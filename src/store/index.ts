@@ -3,13 +3,14 @@ import { createStore, Store, useStore as useStoreVuex } from "vuex"
 
 import IProject from "@/interfaces/IProject"
 import ITask from "@/interfaces/ITask"
-import { INotification, NotificationType } from "@/interfaces/INotification"
+import { INotification } from "@/interfaces/INotification"
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
   DELETE_TASK,
   EDIT_PROJECT,
   EDIT_TASK,
+  NOTIFY,
   SAVE_TASK,
 } from "./mutations-type"
 
@@ -25,26 +26,7 @@ export const store = createStore<State>({
   state: {
     projects: [],
     tasks: [],
-    notifications: [
-      {
-        id: 1,
-        text: "Texto",
-        title: "Success",
-        type: NotificationType.SUCCESS,
-      },
-      {
-        id: 2,
-        text: "Texto",
-        title: "Error",
-        type: NotificationType.ERROR,
-      },
-      {
-        id: 3,
-        text: "Texto",
-        title: "Warning",
-        type: NotificationType.WARNING,
-      },
-    ],
+    notifications: [],
   },
   mutations: {
     [ADD_PROJECT](state, projectName: string) {
@@ -71,6 +53,16 @@ export const store = createStore<State>({
     },
     [DELETE_TASK](state, id: string) {
       state.tasks = state.tasks.filter((item) => item.id != id)
+    },
+    [NOTIFY](state, newNotification: INotification) {
+      newNotification.id = new Date().getTime()
+      state.notifications.push(newNotification)
+
+      setTimeout(() => {
+        state.notifications = state.notifications.filter(
+          (notification) => notification.id != newNotification.id
+        )
+      }, 3000)
     },
   },
 })

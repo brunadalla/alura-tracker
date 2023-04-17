@@ -21,7 +21,8 @@
 import { defineComponent } from "vue"
 
 import { useStore } from "@/store"
-import { ADD_PROJECT, EDIT_PROJECT } from "@/store/mutations-type"
+import { ADD_PROJECT, EDIT_PROJECT, NOTIFY } from "@/store/mutations-type"
+import { NotificationType } from "@/interfaces/INotification"
 
 export default defineComponent({
   name: "FormView",
@@ -54,6 +55,11 @@ export default defineComponent({
         this.store.commit(ADD_PROJECT, this.projectName)
       }
       this.projectName = ""
+      this.store.commit(NOTIFY, {
+        title: "Success!",
+        text: "Your new project has been saved and it's already available ;)",
+        type: NotificationType.SUCCESS,
+      })
       this.$router.push("/projects")
     },
   },
