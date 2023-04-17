@@ -7,6 +7,7 @@
       <SideSection @toChangedTheme="changeTheme" />
     </div>
     <div class="column is-three-quarter content">
+      <NotificationComponent />
       <router-view></router-view>
     </div>
   </main>
@@ -15,11 +16,13 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import SideSection from "./components/SideSection.vue"
+import NotificationComponent from "./components/Notification.vue"
 
 export default defineComponent({
   name: "App",
   components: {
     SideSection,
+    NotificationComponent,
   },
   data() {
     return {
@@ -50,4 +53,3 @@ main.dark-mode {
   background-color: var(--bg-primary);
 }
 </style>
-
